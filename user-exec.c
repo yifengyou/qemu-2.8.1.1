@@ -206,11 +206,11 @@ int cpu_signal_handler(int host_signum, void *pinfo,
     siginfo_t *info = pinfo;
     unsigned long pc;
 #if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
-    ucontext_t *uc = puc;
+    ucontext *uc = puc;
 #elif defined(__OpenBSD__)
     struct sigcontext *uc = puc;
 #else
-    struct ucontext_t *uc = puc;
+    struct ucontext *uc = puc;
 #endif
 
     pc = PC_sig(uc);
@@ -275,7 +275,7 @@ int cpu_signal_handler(int host_signum, void *pinfo,
 {
     siginfo_t *info = pinfo;
 #if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
-    ucontext_t *uc = puc;
+    ucontext *uc = puc;
 #else
     struct ucontext *uc = puc;
 #endif
@@ -351,7 +351,7 @@ int cpu_signal_handler(int host_signum, void *pinfo,
     unsigned long pc = uc->sc_pc;
     void *sigmask = (void *)(long)uc->sc_mask;
 #elif defined(__NetBSD__)
-    ucontext_t *uc = puc;
+    ucontext *uc = puc;
     unsigned long pc = _UC_MACHINE_PC(uc);
     void *sigmask = (void *)&uc->uc_sigmask;
 #endif
@@ -400,7 +400,7 @@ int cpu_signal_handler(int host_signum, void *pinfo,
 {
     siginfo_t *info = pinfo;
 #if defined(__NetBSD__)
-    ucontext_t *uc = puc;
+    ucontext *uc = puc;
 #else
     struct ucontext *uc = puc;
 #endif
